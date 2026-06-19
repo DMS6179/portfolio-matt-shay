@@ -22,9 +22,20 @@ export type StatInfo = {
     subLine : string
 }
 
-//Alert Type Set
+//Alert Types
 
 export type AlertInfo = {
     id : string,
     message : string
+}
+
+
+//DashboardProps Types
+
+export type DashboardProps = {
+    todaysAppointments : AppointmentInfo[],
+    completedAppointments : AppointmentInfo[],
+    statCards : StatInfo[],
+    alerts : AlertInfo[],
+    businessName : string
 }
