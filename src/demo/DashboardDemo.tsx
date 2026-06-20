@@ -54,24 +54,28 @@ function DashboardDemo() {
         const fakeStatCards: StatInfo[] = [
             //Todays Jobs
             {
+                id : "S20001",
                 label : "Todays Jobs" ,
                 number : 8,
                 subLine : "3 Pending, 5 Confirmed"
             },    
             //This Week
             {
+                id : "S20002",
                 label : "This Week" ,
                 number : 2460,
                 subLine : "Up 12% from last week"
             },    
             //New Customers
             {
+                id : "S20003",
                 label : "New Customers" ,
                 number : 3,
                 subLine : "This Month"
             },    
             //Average Job Value
             {
+                id : "S20004",
                 label : "Average Job Value" ,
                 number : 438,
                 subLine : "Last 30 Days"

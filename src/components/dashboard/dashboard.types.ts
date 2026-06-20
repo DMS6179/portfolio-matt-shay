@@ -17,6 +17,7 @@ export type AppointmentInfo =  {
 //Stat Card Types
 
 export type StatInfo = {
+    id : string,
     label : string,
     number : number,
     subLine : string
