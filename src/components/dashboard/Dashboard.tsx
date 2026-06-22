@@ -42,6 +42,7 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
               label={statCard.label}
               number={statCard.number}
               subLine={statCard.subLine}
+              isCurrency = {statCard.isCurrency}
             />
           ))}
         </div>

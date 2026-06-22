@@ -52,33 +52,36 @@ function DashboardDemo() {
         //Fake Stat Cards
 
         const fakeStatCards: StatInfo[] = [
-            //Todays Jobs
+            //Todays Revenue
             {
                 id : "S20001",
-                label : "Todays Jobs" ,
-                number : 8,
-                subLine : "3 Pending, 5 Confirmed"
+                label : "Todays Revenue" ,
+                number : 1346,
+                subLine : "Down 3% from yesterday",
+                isCurrency: true
             },    
-            //This Week
+            //Weekly Revenue
             {
                 id : "S20002",
-                label : "This Week" ,
+                label : "Weekly Revenue" ,
                 number : 2460,
-                subLine : "Up 12% from last week"
+                subLine : "Up 12% from last week",
+                isCurrency: true
             },    
-            //New Customers
+            //This Month
             {
                 id : "S20003",
-                label : "New Customers" ,
-                number : 3,
-                subLine : "This Month"
+                label : "This Month" ,
+                number : 12365,
+                subLine : "6 new costumers",
+                isCurrency: true
             },    
             //Average Job Value
             {
                 id : "S20004",
-                label : "Average Job Value" ,
-                number : 438,
-                subLine : "Last 30 Days"
+                label : "Open Requests" ,
+                number : 5,
+                subLine : "31 total customers"
             },
         ]
         //Fake Alerts

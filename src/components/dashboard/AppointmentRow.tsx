@@ -1,9 +1,17 @@
 import type { AppointmentInfo } from "./dashboard.types";
 
 function AppointmentRow({ appTime, name, service, location, status }: Omit<AppointmentInfo, "id" | "createdAt">) {
+    function getTime(time: string) {
+        const timeFormatted =new Date(time).toLocaleTimeString('en-US', {
+                hour: 'numeric',
+                minute: '2-digit'
+        })
+    return timeFormatted
+    }
+
   return (
     <div className="grid grid-cols-5 gap-4 px-5 py-3 text-sm text-[#2C4A6E] items-center">
-      <p className="font-mono text-xs text-[#7BA7BC]">{appTime}</p>
+      <p className="font-mono text-xs text-[#7BA7BC]">{getTime(appTime)}</p>
       <p className="font-medium">{name}</p>
       <p className="text-[#4A6480]">{service}</p>
       <p className="text-[#4A6480]">{location}</p>

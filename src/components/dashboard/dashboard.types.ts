@@ -20,7 +20,8 @@ export type StatInfo = {
     id : string,
     label : string,
     number : number,
-    subLine : string
+    subLine : string,
+    isCurrency?: boolean
 }
 
 //Alert Types
