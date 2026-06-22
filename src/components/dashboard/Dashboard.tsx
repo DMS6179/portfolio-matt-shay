@@ -48,7 +48,7 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
         </div>
 
         {/* Today's Appointments */}
-        <h2 className="font-serif text-2xl font-light text-[#2C4A6E] mb-4">
+        <h2 className="font-mono text-m text-[#2C4A6E] tracking-wide uppercase mb-4">
           Today's appointments
         </h2>
         <div className="bg-white border border-[#C4A882] rounded mb-8">
@@ -66,7 +66,7 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
         </div>
 
         {/* Completed Jobs */}
-        <h2 className="font-serif text-2xl font-light text-[#2C4A6E] mb-4">
+        <h2 className="font-mono text-m text-[#2C4A6E] tracking-wide uppercase mb-4">
           Recent completed jobs
         </h2>
         <div className="bg-white border border-[#C4A882] rounded">

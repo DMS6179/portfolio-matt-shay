@@ -35,6 +35,18 @@ function DashboardDemo() {
             service : "Wall Cleaning Services",
             location : "789 Fakest Street, Fakeington, USA",
             status : "pending" , 
+        }, 
+
+        //Fake Completed Appointments
+
+        {
+            id : "app0004",
+            createdAt : "2026-06-17T08:00:00",
+            appTime:    "2026-06-18T16:15:00",
+            name : "Billie Shay",
+            service : "Wall Cleaning Services",
+            location : "321 Fake Street, Fakeopolus, USA",
+            status : "confirmed" , 
         }]
 
         //Fake Completed Appointments
