@@ -59,7 +59,7 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
         <h2 className="font-mono text-m text-[#2C4A6E] dark:text-[#F0EBE3] tracking-wide uppercase mb-4">
           Today's appointments
         </h2>
-        <div className="bg-white dark:bg-[#243548] text-[#2C4A6E] dark:text-[#2C4A6E] [border border-[#C4A882] rounded mb-8">
+        <div className="bg-white dark:bg-[#243548] [border border-[#C4A882] rounded mb-8">
           {todaysAppointments.map((appointment, index) => (
             <div key={appointment.id} className={index !== 0 ? "border-t border-[#E8EEF4]" : ""}>
               <AppointmentRow
