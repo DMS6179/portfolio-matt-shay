@@ -1,7 +1,15 @@
 import type { AppointmentInfo } from "./dashboard.types";
+import { useState } from "react";
 
-function AppointmentRow({ appTime, name, service, location, status }: Omit<AppointmentInfo, "id" | "createdAt">) {
-    function getTime(time: string) {
+function AppointmentRow({id, appTime, name, service, location, status, onStatusChange, onStage, isStaged, stagedStatus }: Omit<AppointmentInfo, "createdAt"> & { 
+  onStatusChange: (id: string, newStatus: "pending" | "confirmed" | "completed") => void
+  onStage: (id: string, newStatus: "pending" | "confirmed" | "completed") => void
+  isStaged: boolean
+  stagedStatus: "pending" | "confirmed" | "completed" | null
+}) {
+  const [rolodexState, setrolodexState] = useState<false>  
+  
+  function getTime(time: string) {
         const timeFormatted =new Date(time).toLocaleTimeString('en-US', {
                 hour: 'numeric',
                 minute: '2-digit'

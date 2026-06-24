@@ -6,6 +6,7 @@ import { useState } from "react";
 function Dashboard({ businessName, todaysAppointments, completedAppointments, statCards, alerts }: DashboardProps) {
     
   const [dismissedAlerts, setDismissedAlerts] = useState<Set<string>> (new Set())
+  const [appointments, setAppointments] = useState([...todaysAppointments, ...completedAppointments])
   
   function getGreeting(){
       const now = new Date()
@@ -17,6 +18,10 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
 
     function handleDismiss (id: string) {
       setDismissedAlerts(new Set([...dismissedAlerts, id]))
+    }
+
+    function handleStatusChange(id: string, newStatus: "pending" | "confirmed" | "completed"): void {
+      setAppointments(appointments.map(app => app.id === id ? { ...app, status: newStatus } : app));
     }
 
     return (
@@ -59,15 +64,17 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
         <h2 className="font-mono text-m text-[#2C4A6E] dark:text-[#F0EBE3] tracking-wide uppercase mb-4">
           Today's appointments
         </h2>
-        <div className="bg-white dark:bg-[#243548] [border border-[#C4A882] rounded mb-8">
-          {todaysAppointments.map((appointment, index) => (
+        <div className="bg-white dark:bg-[#243548] border border-[#C4A882] rounded mb-8">
+          {appointments.filter(app => app.status !== "completed").map((appointment, index) => (
             <div key={appointment.id} className={index !== 0 ? "border-t border-[#E8EEF4]" : ""}>
               <AppointmentRow
+                id={appointment.id}
                 appTime={appointment.appTime}
                 name={appointment.name}
                 service={appointment.service}
                 location={appointment.location}
                 status={appointment.status}
+                onStatusChange={() => {}}
               />
             </div>
           ))}
@@ -78,14 +85,16 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
           Recent completed jobs
         </h2>
         <div className="bg-white dark:bg-[#243548] border border-[#C4A882] rounded">
-          {completedAppointments.map((appointment, index) => (
+          {appointments.filter(app => app.status === "completed").map((appointment, index) => (
             <div key={appointment.id} className={index !== 0 ? "border-t border-[#E8EEF4]" : ""}>
               <AppointmentRow
+                id={appointment.id}
                 appTime={appointment.appTime}
                 name={appointment.name}
                 service={appointment.service}
                 location={appointment.location}
                 status={appointment.status}
+                onStatusChange={handleStatusChange}
               />
             </div>
           ))}

@@ -11,7 +11,8 @@ export type AppointmentInfo =  {
     service : string,
     location? : string,
     status : "pending" | "confirmed" | "completed" ,
-    notes? : string
+    notes? : string,
+    value?: number
 } 
 
 //Stat Card Types
