@@ -23,7 +23,9 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
     }
 
     function handleStatusChange(id: string, newStatus: "pending" | "confirmed" | "completed"): void {
-      setAppointments(appointments.map(app => app.id === id ? { ...app, status: newStatus } : app));
+      setAppointments(appointments.map(app => app.id === id ? { ...app, status: newStatus } : app))
+      setStagedAppointmentId(null)
+      setStagedStatus(null)
     }
 
     function handleStage(id: string, newStatus: "pending" | "confirmed" | "completed") {

@@ -56,7 +56,7 @@ function DashboardDemo() {
         //Fake Completed Appointments
 
         const fakeCompletedAppointments: AppointmentInfo[] = [{
-            id : "app0004",
+            id : "app0005",
             createdAt : "2026-06-17T08:00:00",
             appTime:    "2026-06-18T10:15:00",
             name : "Pat Shay",
