@@ -9,6 +9,9 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
   const [appointments, setAppointments] = useState([...todaysAppointments, ...completedAppointments])
   const [stagedAppointmentId, setStagedAppointmentId] = useState<string | null> (null)
   const [stagedStatus, setStagedStatus] = useState<"pending" | "confirmed" | "completed" | null> (null)
+  const [dailyRevenue, setDailyRevenue] = useState(1346)
+  const [monthlyRevenue, setMonthlyRevenue] = useState(12365)
+  const [isAnyRolodexOpen, setIsAnyRolodexOpen] = useState(false)
 
   function getGreeting(){
       const now = new Date()
@@ -26,6 +29,12 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
       setAppointments(appointments.map(app => app.id === id ? { ...app, status: newStatus } : app))
       setStagedAppointmentId(null)
       setStagedStatus(null)
+      const foundAppointment = appointments.find(app => app.id === id)
+      const appointmentValue = foundAppointment?.value ?? 0
+      if (newStatus === "completed") { 
+        setDailyRevenue(dailyRevenue + appointmentValue)
+        setMonthlyRevenue(monthlyRevenue + appointmentValue)
+      }
     }
 
     function handleStage(id: string, newStatus: "pending" | "confirmed" | "completed") {
@@ -35,7 +44,12 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
 
     return (
       <div className="bg-[#F7F4EF] dark:bg-[#1A2535] min-h-screen p-8">
-
+        {isAnyRolodexOpen && (
+          <div 
+            className="fixed inset-0 bg-black/80 z-40"
+            onClick={() => setIsAnyRolodexOpen(false)}
+          />
+        )}
         {/* Greeting */}
         <h1 className="font-serif text-3xl font-light text-[#2C4A6E] dark:text-[#F0EBE3] mb-1">
           {getGreeting()}{businessName}
@@ -62,7 +76,9 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
             <StatCard
               key={statCard.id}
               label={statCard.label}
-              number={statCard.number}
+              number={statCard.label === "Todays Revenue" ? dailyRevenue 
+                : statCard.label === "This Month" ? monthlyRevenue 
+                : statCard.number}
               subLine={statCard.subLine}
               isCurrency = {statCard.isCurrency}
           />
@@ -87,6 +103,7 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
                 onStage={handleStage}
                 isStaged={stagedAppointmentId === appointment.id}
                 stagedStatus={stagedStatus}
+                onRolodexOpen={setIsAnyRolodexOpen}
               />
             </div>
           ))}
@@ -110,6 +127,7 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
                 onStage={handleStage}
                 isStaged={stagedAppointmentId === appointment.id}
                 stagedStatus={stagedStatus}
+                onRolodexOpen={setIsAnyRolodexOpen}
               />
             </div>
           ))}

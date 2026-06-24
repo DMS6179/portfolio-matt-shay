@@ -7,7 +7,7 @@ function StatCard({ label, number, subLine, isCurrency }: Omit<StatInfo, "id">) 
       <p className="font-mono text-xs text-[#7BA7BC] tracking-wide uppercase mb-1">
         {label}
       </p>
-      <p className="font-serif text-4xl font-light text-[#2C4A6E] dark:text-[#F0EBE3] leading-none mb-1">
+      <p className="font-mono text-3xl font-light text-[#2C4A6E] dark:text-[#F0EBE3] leading-none mb-1">
         {isCurrency ? new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
