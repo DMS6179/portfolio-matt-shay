@@ -16,7 +16,8 @@ function DashboardDemo() {
             name : "Matt Shay",
             service : "Home Services",
             location : "123 Fake Street, Faketown, USA",
-            status : "pending" , 
+            status : "pending" ,
+            value: 120 
         },
             {
             id : "app0002",
@@ -25,7 +26,8 @@ function DashboardDemo() {
             name : "Hannah Shay",
             service : "Carpet Cleaning Services",
             location : "456 Faker Street, Fakeville, USA",
-            status : "pending" , 
+            status : "pending" ,
+            value: 45
         },
             {
             id : "app0003",
@@ -34,7 +36,8 @@ function DashboardDemo() {
             name : "Joe Shay",
             service : "Wall Cleaning Services",
             location : "789 Fakest Street, Fakeington, USA",
-            status : "pending" , 
+            status : "pending" ,
+            value: 68 
         }, 
 
         //Fake Completed Appointments
@@ -46,7 +49,8 @@ function DashboardDemo() {
             name : "Billie Shay",
             service : "Wall Cleaning Services",
             location : "321 Fake Street, Fakeopolus, USA",
-            status : "confirmed" , 
+            status : "confirmed" ,
+            value: 145 
         }]
 
         //Fake Completed Appointments

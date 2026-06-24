@@ -7,7 +7,7 @@ function AppointmentRow({id, appTime, name, service, location, status, onStatusC
   isStaged: boolean
   stagedStatus: "pending" | "confirmed" | "completed" | null
 }) {
-  const [rolodexState, setrolodexState] = useState<false>  
+  const [isRolodexOpen, setIsRolodexOpen] = useState(false)  
   
   function getTime(time: string) {
         const timeFormatted =new Date(time).toLocaleTimeString('en-US', {

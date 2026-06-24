@@ -7,7 +7,9 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
     
   const [dismissedAlerts, setDismissedAlerts] = useState<Set<string>> (new Set())
   const [appointments, setAppointments] = useState([...todaysAppointments, ...completedAppointments])
-  
+  const [stagedAppointmentId, setStagedAppointmentId] = useState<string | null> (null)
+  const [stagedStatus, setStagedStatus] = useState<"pending" | "confirmed" | "completed" | null> (null)
+
   function getGreeting(){
       const now = new Date()
       const hour = now.getHours()
@@ -22,6 +24,11 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
 
     function handleStatusChange(id: string, newStatus: "pending" | "confirmed" | "completed"): void {
       setAppointments(appointments.map(app => app.id === id ? { ...app, status: newStatus } : app));
+    }
+
+    function handleStage(id: string, newStatus: "pending" | "confirmed" | "completed") {
+      setStagedAppointmentId(id)
+      setStagedStatus(newStatus)
     }
 
     return (
@@ -74,7 +81,10 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
                 service={appointment.service}
                 location={appointment.location}
                 status={appointment.status}
-                onStatusChange={() => {}}
+                onStatusChange={handleStatusChange}
+                onStage={handleStage}
+                isStaged={stagedAppointmentId === appointment.id}
+                stagedStatus={stagedStatus}
               />
             </div>
           ))}
@@ -95,6 +105,9 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
                 location={appointment.location}
                 status={appointment.status}
                 onStatusChange={handleStatusChange}
+                onStage={handleStage}
+                isStaged={stagedAppointmentId === appointment.id}
+                stagedStatus={stagedStatus}
               />
             </div>
           ))}
