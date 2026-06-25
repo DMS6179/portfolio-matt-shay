@@ -14,8 +14,8 @@ function AppointmentRow({id, appTime, name, service, location, status, onStatusC
     const allStatuses = ["pending", "confirmed", "completed"] as const
     const otherStatuses = allStatuses.filter(currStatus => currStatus !== status)
     const rolodexRef = useRef<HTMLDivElement>(null)
-    
-
+    const [isConfirmFlashing, setIsConfirmFlashing] = useState(false)
+      console.log(isStaged, isConfirmFlashing)
     //Functions//
     function getTime(time: string) {
             const timeFormatted =new Date(time).toLocaleTimeString('en-US', {
@@ -40,7 +40,7 @@ function AppointmentRow({id, appTime, name, service, location, status, onStatusC
         return () => {
             document.removeEventListener('mousedown', handleClickOutside)
         }
-    }, [isRolodexOpen, onRolodexOpen])
+    }, [isRolodexOpen])
 
     return (
         <div className="grid grid-cols-5 gap-4 px-5 py-3 text-sm text-[#2C4A6E] dark:text-[#F0EBE3] items-center">
@@ -83,14 +83,20 @@ function AppointmentRow({id, appTime, name, service, location, status, onStatusC
                             )}
                         </div>
                     )}
-
-                    {isStaged && (
-                        <div>
-                                <button onClick={() => onStatusChange(id, stagedStatus!)}>
+                      {(isStaged || isConfirmFlashing) && (
+                        <div className="border-2 border-red-500">
+                                <button onClick= {() => {
+                                  onStatusChange(id, stagedStatus!)
+                                  setIsConfirmFlashing(true)
+                                  setTimeout(() => setIsConfirmFlashing(false), 1000)
+                                  }} className={`font-mono text-xs px-2 py-1 rounded-lg border cursor-pointer transition-all duration-200 text-[#2A5C2A] border-[#7AAD7A]
+                                        ${isConfirmFlashing ? "bg-[#E8F0E8]" : "bg-white"}
+                                        ${!isStaged && !isConfirmFlashing ? "opacity-0" : "opacity-100"}
+                                  `}>
                                     ✓ Confirm
                                 </button>
                         </div>
-                    )}
+                      )}        
                 </div>    
         </div>
     );

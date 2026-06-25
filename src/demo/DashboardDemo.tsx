@@ -47,7 +47,7 @@ function DashboardDemo() {
             createdAt : "2026-06-17T08:00:00",
             appTime:    "2026-06-18T16:15:00",
             name : "Billie Shay",
-            service : "Wall Cleaning Services",
+            service : "Landscaping Services",
             location : "321 Fake Street, Fakeopolus, USA",
             status : "confirmed" ,
             value: 145 
@@ -60,7 +60,7 @@ function DashboardDemo() {
             createdAt : "2026-06-17T08:00:00",
             appTime:    "2026-06-18T10:15:00",
             name : "Pat Shay",
-            service : "Wall Cleaning Services",
+            service : "Floor Cleaning Services",
             location : "111 Fakester Street, Fake City, USA",
             status : "completed" , 
         }]

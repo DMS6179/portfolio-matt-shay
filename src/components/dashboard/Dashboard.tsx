@@ -10,8 +10,12 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
   const [stagedAppointmentId, setStagedAppointmentId] = useState<string | null> (null)
   const [stagedStatus, setStagedStatus] = useState<"pending" | "confirmed" | "completed" | null> (null)
   const [dailyRevenue, setDailyRevenue] = useState(1346)
+  const [weeklyRevenue, setWeeklyRevenue] = useState(2460)
   const [monthlyRevenue, setMonthlyRevenue] = useState(12365)
   const [isAnyRolodexOpen, setIsAnyRolodexOpen] = useState(false)
+  const [isFlashShowing, setIsFlashShowing] = useState(false)
+  const [completedJobValue, setCompletedJobValue] = useState(0)
+
 
   function getGreeting(){
       const now = new Date()
@@ -26,18 +30,31 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
     }
 
     function handleStatusChange(id: string, newStatus: "pending" | "confirmed" | "completed"): void {
+      console.trace("handleStatusChange called from:")
+      console.log("handleStatusChange fired", id, newStatus)
       setAppointments(appointments.map(app => app.id === id ? { ...app, status: newStatus } : app))
       setStagedAppointmentId(null)
       setStagedStatus(null)
       const foundAppointment = appointments.find(app => app.id === id)
       const appointmentValue = foundAppointment?.value ?? 0
+      const appointmentStatus = foundAppointment?.status ?? "pending"
       if (newStatus === "completed") { 
         setDailyRevenue(dailyRevenue + appointmentValue)
+        setWeeklyRevenue(weeklyRevenue + appointmentValue)
         setMonthlyRevenue(monthlyRevenue + appointmentValue)
+       // setCompletedJobValue(appointmentValue)
+       // setIsFlashShowing(true)
+       // setTimeout(() => setIsFlashShowing(false), 1500)
+      }
+      else if (appointmentStatus === "completed") {
+        setDailyRevenue(dailyRevenue - appointmentValue)
+        setWeeklyRevenue(weeklyRevenue - appointmentValue)
+        setMonthlyRevenue(monthlyRevenue - appointmentValue)
       }
     }
 
     function handleStage(id: string, newStatus: "pending" | "confirmed" | "completed") {
+      console.log("handleStage fired", id, newStatus)
       setStagedAppointmentId(id)
       setStagedStatus(newStatus)
     }
@@ -71,13 +88,22 @@ function Dashboard({ businessName, todaysAppointments, completedAppointments, st
         ))}
 
         {/* Stat Cards */}
+          <p className={`font-mono text-sm text-green-600 transition-opacity duration-500" ${isFlashShowing ? "opacity-100" : "opacity-0"} `}> 
+            {new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+              maximumFractionDigits: 0
+              }).format(completedJobValue)}
+              
+          </p>
         <div className="grid grid-cols-4 gap-4 mb-8">
           {statCards.map(statCard => (
             <StatCard
               key={statCard.id}
               label={statCard.label}
               number={statCard.label === "Todays Revenue" ? dailyRevenue 
-                : statCard.label === "This Month" ? monthlyRevenue 
+                : statCard.label === "This Month" ? monthlyRevenue
+                : statCard.label === "Weekly Revenue" ? weeklyRevenue
                 : statCard.number}
               subLine={statCard.subLine}
               isCurrency = {statCard.isCurrency}
